@@ -1,0 +1,178 @@
+{
+    "Outfit": [
+        {
+            "question": "What is his clothing type",
+            "hugging_face_answer": "nun",
+            "blip_answer": "hijab"
+        },
+        {
+            "question": "Is he wearing an outer garment (yes or no)",
+            "hugging_face_answer": "yes",
+            "blip_answer": "yes"
+        },
+        {
+            "question": "What outer garment he wear",
+            "hugging_face_answer": "black",
+            "blip_answer": "jacket"
+        },
+        {
+            "question": "What color his  outer garment ",
+            "hugging_face_answer": "black",
+            "blip_answer": "black"
+        },
+        {
+            "question": "Does the person wear any headgear? (Yes or no)",
+            "hugging_face_answer": "yes",
+            "blip_answer": "yes"
+        },
+        {
+            "question": "what the person's headgear type",
+            "hugging_face_answer": "scarf",
+            "blip_answer": "turban"
+        },
+        {
+            "question": "What the color of the person's headgear",
+            "hugging_face_answer": "silver",
+            "blip_answer": "white"
+        },
+        {
+            "question": "does he have a beard (yes or no) ? ",
+            "hugging_face_answer": "no",
+            "blip_answer": "no"
+        },
+        {
+            "question": "Is he wearing a face covering? (yes or no)",
+            "hugging_face_answer": "yes",
+            "blip_answer": "yes"
+        },
+        {
+            "question": "What color is the face covering?",
+            "hugging_face_answer": "white",
+            "blip_answer": "white"
+        },
+        {
+            "question": "Does he wear glasses?(yes or no)?",
+            "hugging_face_answer": "no",
+            "blip_answer": "no"
+        },
+        {
+            "question": "what type of the glasses wear",
+            "hugging_face_answer": "sunglasses",
+            "blip_answer": "eyeglasses"
+        },
+        {
+            "question": "What kind of shirt does he wear",
+            "hugging_face_answer": "long sleeve",
+            "blip_answer": "long sleeved"
+        },
+        {
+            "question": "What color is his shirt",
+            "hugging_face_answer": "black",
+            "blip_answer": "black"
+        },
+        {
+            "question": "Is he wearing a watch( yes or no)?",
+            "hugging_face_answer": "yes",
+            "blip_answer": "no"
+        },
+        {
+            "question": "What is the color of his watch",
+            "hugging_face_answer": "black",
+            "blip_answer": "black"
+        },
+        {
+            "question": "Is he wearing a belt?",
+            "hugging_face_answer": "no",
+            "blip_answer": "no"
+        },
+        {
+            "question": "what is the color of his belt",
+            "hugging_face_answer": "black",
+            "blip_answer": "black"
+        },
+        {
+            "question": "Does he wear a short or long pants ",
+            "hugging_face_answer": "long",
+            "blip_answer": "long"
+        },
+        {
+            "question": "What type of the pants he wear",
+            "hugging_face_answer": "jeans",
+            "blip_answer": "long pants"
+        },
+        {
+            "question": "What the color of the person's plants ",
+            "hugging_face_answer": "green",
+            "blip_answer": "green"
+        },
+        {
+            "question": "does he wear shoes?",
+            "hugging_face_answer": "yes",
+            "blip_answer": "yes"
+        },
+        {
+            "question": "what type of his shoes",
+            "hugging_face_answer": "sneakers",
+            "blip_answer": "sneakers"
+        },
+        {
+            "question": "What brand his shoes",
+            "hugging_face_answer": "nike",
+            "blip_answer": "nike"
+        }
+    ],
+    "Visibility": [
+        {
+            "question": "Is the person is a male or female?",
+            "hugging_face_answer": "female",
+            "blip_answer": "female"
+        },
+        {
+            "question": "What is his age group",
+            "hugging_face_answer": "adult",
+            "blip_answer": "adult"
+        },
+        {
+            "question": "Does he have head hair?(yes or no)",
+            "hugging_face_answer": "yes",
+            "blip_answer": "yes"
+        },
+        {
+            "question": "Is his color hair is black?(yes or no)",
+            "hugging_face_answer": "no",
+            "blip_answer": "no"
+        },
+        {
+            "question": "Does he have long or short hair",
+            "hugging_face_answer": "long",
+            "blip_answer": "long"
+        }
+    ],
+    "Actions": [
+        {
+            "question": "Is he holding something in his hand?(yes or no)",
+            "hugging_face_answer": "no",
+            "blip_answer": "yes"
+        },
+        {
+            "question": "In which hand he hold somthing ",
+            "hugging_face_answer": "right",
+            "blip_answer": "right"
+        },
+        {
+            "question": "What does he hold?",
+            "hugging_face_answer": "bag",
+            "blip_answer": "bag"
+        },
+        {
+            "question": "Does the person eat?",
+            "hugging_face_answer": "no",
+            "blip_answer": "no"
+        },
+        {
+            "question": "Does the person sitting or standing ",
+            "hugging_face_answer": "standing",
+            "blip_answer": "standing"
+        }
+    ]
+}

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Object Detection and Tracking System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Object Detection and Tracking System</h1>
+        <form action="{{ url_for('submit_form') }}" method="POST" enctype="multipart/form-data">
+
+            <div class="section">
+    <h2>System Methods and Configuration</h2>
+    <div class="field">
+        <label><b>Source format:</b></label>
+        <div class="input">
+            <label><input type="radio" name="source_format" value="local_image">local image</label>
+            <label><input type="radio" name="source_format" value="local_video">local video</label>
+            <label><input type="radio" name="source_format" value="directory_of_images">directory of images</label>
+        </div>
+    </div>
+    <div class="buttons">
+        <label for="upload_file" class="custom-file-upload">Choose file</label>
+        <input type="file" id="upload_file" name="upload_file">
+    </div>
+    <div class="field">
+        <label>Use Re-identification algorithm:</label>
+        <div class="input">
+            <label><input type="radio" name="reid_algorithm" value="yes">Yes</label>
+            <label><input type="radio" name="reid_algorithm" value="no">No</label>
+        </div>
+    </div>
+                <div class="field">
+                    <label>Use Segmentation mask algorithm:</label>
+                    <div class="input">
+                        <label><input type="radio" name="segmentation_algorithm" value="yes">Yes</label>
+                        <label><input type="radio" name="segmentation_algorithm" value="no">No</label>
+                    </div>
+                </div>
+                <div class="field">
+                     <label>Speed vs Accuracy:</label>
+                    <div class="input">
+                        <input type="range" name="speed_accuracy" min="0" max="2" step="1">
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Show result real time:</label>
+                    <div class="input">
+                        <label><input type="radio" name="show_realtime" value="yes">Yes</label>
+                        <label><input type="radio" name="show_realtime" value="no">No</label>
+                    </div>
+                </div>
+            </div>
+            <div class="section">
+                <h2>Object Tracking Configuration</h2>
+                <div class="field">
+                    <label>Tracker:</label>
+                    <div class="input">
+                        <select name="tracker">
+                            <option value="deepocsort">DeepOCsort</option>
+                            <option value="strongsort">StrongSORT</option>
+<option value="ocsort">OCSORT</option>
+<option value="bytetrack" selected>ByteTrack</option>
+<option value="botsort">BotSORT</option>
+</select>
+</div>
+</div>
+</div>
+<div class="section">
+<h2>Object Detection Configuration</h2>
+<div class="field">
+    <label for="vehicle_type">Vehicle Type:</label>
+    <div class="input">
+        <div id="vehicle_type">
+            <input type="checkbox" id="vehicle_type_Big" name="vehicle_type[]" value="Big">
+            <label for="vehicle_type_Big">Big</label><br>
+            <input type="checkbox" id="vehicle_type_Truck" name="vehicle_type[]" value="Truck">
+            <label for="vehicle_type_Truck">Truck</label><br>
+            <input type="checkbox" id="vehicle_type_Bus" name="vehicle_type[]" value="Bus">
+            <label for="vehicle_type_Bus">Bus</label><br>
+            <input type="checkbox" id="vehicle_type_Motorcycle" name="vehicle_type[]" value="Motorcycle">
+            <label for="vehicle_type_Motorcycle">Motorcycle</label><br>
+            <input type="checkbox" id="vehicle_type_Pickup" name="vehicle_type[]" value="Pickup">
+            <label for="vehicle_type_Pickup">Pickup</label><br>
+            <input type="checkbox" id="vehicle_type_Sedan" name="vehicle_type[]" value="Sedan">
+            <label for="vehicle_type_Sedan">Sedan</label><br>
+            <input type="checkbox" id="vehicle_type_SUV" name="vehicle_type[]" value="SUV">
+            <label for="vehicle_type_SUV">SUV</label><br>
+            <input type="checkbox" id="vehicle_type_Van" name="vehicle_type[]" value="Van">
+            <label for="vehicle_type_Van">Van</label><br>
+            <input type="checkbox" id="vehicle_type_Unknown" name="vehicle_type[]" value="Unknown">
+            <label for="vehicle_type_Unknown">Unknown</label><br>
+            <input type="checkbox" id="vehicle_type_All" name="vehicle_type[]" value="All">
+            <label for="vehicle_type_All">All</label><br>
+            <br>
+        </div>
+    </div>
+</div>
+<div class="field">
+<label>Vehicle Orientation:</label>
+<div class="input">
+<select name="vehicle_orientation">
+<option value="front">Front</option>
+<option value="rear">Rear</option>
+    <option value="All" selected>All</option>
+
+</select>
+</div>
+</div>
+<div class="field">
+    <label>Vehicle confidence:</label>
+        <div class="input">
+        <input type="text" name="vehicle_confidence" value="0.5">
+        </div>
+</div>
+<div class="field">
+    <label for="vehicle_color">Vehicle Color:</label>
+    <div class="input">
+        <div id="vehicle_color">
+            <input type="checkbox" id="vehicle_color_black" name="vehicle_color[]" value="black">
+            <label for="vehicle_color_black">black</label><br>
+            <input type="checkbox" id="vehicle_color_blue" name="vehicle_color[]" value="blue">
+            <label for="vehicle_color_blue">blue</label><br>
+            <input type="checkbox" id="vehicle_color_brown" name="vehicle_color[]" value="brown">
+            <label for="vehicle_color_brown">brown</label><br>
+            <input type="checkbox" id="vehicle_color_green" name="vehicle_color[]" value="green">
+            <label for="vehicle_color_green">green</label><br>
+            <input type="checkbox" id="vehicle_color_red" name="vehicle_color[]" value="red">
+            <label for="vehicle_color_red">red</label><br>
+            <input type="checkbox" id="vehicle_color_silver" name="vehicle_color[]" value="silver">
+            <label for="vehicle_color_silver">silver</label><br>
+            <input type="checkbox" id="vehicle_color_white" name="vehicle_color[]" value="white">
+            <label for="vehicle_color_white">white</label><br>
+            <input type="checkbox" id="vehicle_color_yellow" name="vehicle_color[]" value="yellow">
+            <label for="vehicle_color_yellow">yellow</label><br>
+            <input type="checkbox" id="vehicle_color_unknown" name="vehicle_color[]" value="unknown">
+            <label for="vehicle_color_unknown">unknown</label><br>
+            <input type="checkbox" id="vehicle_color_all" name="vehicle_color[]" value="All">
+            <label for="vehicle_color_all">All</label><br>
+            <br>
+        </div>
+    </div>
+</div>
+
+
+<div class="field">
+
+<label>Vehicle Make:</label>
+<div class="input">
+<input type="text" name="vehicle_make">
+</div>
+</div>
+<div class="field">
+<label>Vehicle Model:</label>
+<div class="input">
+<input type="text" name="vehicle_model">
+</div>
+</div>
+</div>
+<div class="section">
+<h2>License Plate Terms</h2>
+<div class="field">
+<label>License Plate Color:</label>
+<div class="input">
+<select name="license_plate_color">
+<option value="green">Green</option>
+<option value="yellow">Yellow</option>
+<option value="white">White</option>
+<option value="All" selected>All</option>
+
+</select>
+</div>
+</div>
+<div class="field">
+<label>License Plate Regex:</label>
+<div class="input">
+<input type="text" name="license_plate_regex" value="[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]">
+</div>
+</div>
+</div>
+<div class="section">
+<h2>Post Processing Configuration</h2>
+<div class="field">
+<label>Save Everything vs Save Only Object Detection Terms Output:</label>
+<div class="input">
+<label><input type="radio" name="save_option" value="everything">Save Everything</label>
+<label><input type="radio" name="save_option" value="detection_terms">Only Object Detection Terms Output</label>
+
+</div>
+</div>
+<div class="field">
+<label>Clean Database for Getting "Best Results Only":</label>
+<div class="input">
+<label><input type="radio" name="clean_database" value="yes">Yes</label>
+<label><input type="radio" name="clean_database" value="no" checked>No</label>
+</div>
+</div>
+<div class="field">
+<label>Create Videos from the Tracks of the Tracked Object:</label>
+<div class="input">
+<label><input type="radio" name="create_videos" value="yes">Yes</label>
+<label><input type="radio" name="create_videos" value="no" checked>No</label>
+</div>
+</div>
+<div class="field">
+<label>Export Results to Zip File:</label>
+<div class="input">
+<label><input type="radio" name="export_results" value="yes">Yes</label>
+<label><input type="radio" name="export_results" value="no" checked>No</label>
+</div>
+</div>
+</div>
+<div class="buttons">
+<input type="submit" value="Submit">
+</div>
+</form>
+</div>
+</body>
+</html>

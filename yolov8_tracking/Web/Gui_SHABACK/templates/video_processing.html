@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/video_processing_style.css">
+    <title>Video Processing</title>
+</head>
+<body>
+    <h1>Video Processing</h1>
+
+<form id="video-processing-form" method="post" enctype="multipart/form-data">
+        <section>
+            <h2>Source Uploader</h2>
+            <label for="video_file">1. Upload video file:</label>
+            <input type="file" id="video_file" name="video_file" accept="video/*"><br>
+            <!--<label for="crop_images">2. Upload crop images(directory):</label>
+            <input type="file" id="crop_images" name="crop_images" webkitdirectory directory>
+            -->
+
+            <label for="frame_reading_start">Frame reading start:</label>
+            <input type="number" id="frame_reading_start" name="frame_reading_start" value="0">
+
+            <label for="frame_reading_end">Frame reading end:</label>
+            <input type="number" id="frame_reading_end" name="frame_reading_end" value="15">
+
+
+        </section>
+
+        <section>
+            <h2 id="deblur">Deblur Algorithm</h2>
+            <label for="use_deblur_yes">Use Deblur algorithm?</label>
+            <input type="radio" id="use_deblur_yes" name="use_deblur_yes" value="yes">
+
+            <label for="use_sub_crop_video_yes_deblur">Use sub crop video?</label>
+            <span class="tooltip">
+                <input type="radio" id="use_sub_crop_video_yes_deblur" name="use_sub_crop_video_yes_deblur" value="yes">
+                <span class="tooltiptext">A sub crop video is...</span>
+            </span>
+        </section>
+
+        <section>
+            <h2 id="denoise">Denoise Algorithm</h2>
+            <label for="use_denoise">Use Denoise algorithm?</label>
+            <input type="radio" id="use_denoise" name="use_denoise" value="yes">
+            <label for="use_sub_crop_video_yes_denoise">Use sub crop video?</label>
+            <span class="tooltip">
+                <input type="radio" id="use_sub_crop_video_yes_denoise" name="use_sub_crop_video_yes_denoise" value="yes">
+                <span class="tooltiptext">A sub crop video is...</span>
+            </span>
+            <br>
+            <label for="window_size_temporary">Window size temporary:</label>
+            <input type="number" id="window_size_temporary" name="window_size_temporary" value="5">
+            <span class="tooltip">
+                <span class="tooltiptext">Window size temporary is...</span>
+            </span>
+            <br>
+            <label for="stride_frame">Stride frame:</label>
+            <input type="number" id="stride_frame" name="stride_frame" value="1">
+            <span class="tooltip">
+                <span class="tooltiptext">Stride frame is...</span>
+            </span>
+        </section>
+
+        <input type="submit" value="Submit">
+    </form>
+
+
+    <script>
+
+        // get all radio buttons
+        const radioButtons = document.querySelectorAll('input[type=radio]');
+
+        // add event listener to each radio button
+        radioButtons.forEach(function(radio) {
+            radio.addEventListener('click', function() {
+                // uncheck all other radio buttons in the same group
+                document.querySelectorAll(`input[type=radio][name=${radio.name}]`)
+                    .forEach(otherRadio => {
+                        if (otherRadio !== radio) {
+                            otherRadio.checked = false;
+                        }
+                    });
+            });
+        });
+
+    </script>
+
+</body>
+</html>

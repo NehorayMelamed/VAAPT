@@ -7,6 +7,17 @@
 !*.hpp
 !*.c
 !*.txt
-
+!*.json
+!*.yml
+!*.xml
+!*.md
+!*.sh
+!*.bat
+!*.yaml
+!*.ps
+!*.m
+!*.js
+!*.html
+!*.css
 
 
