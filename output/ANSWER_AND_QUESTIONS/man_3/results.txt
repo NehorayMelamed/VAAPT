@@ -1,0 +1,142 @@
+
+!!!!! Outfit !!!!!
+Question:    What is his clothing type
+Hugging face answer:   jeans
+Blip Answer:           jeans
+
+Question:    Is he wearing an outer garment (yes or no)
+Hugging face answer:   no
+Blip Answer:           no
+
+Question:    What outer garment he wear
+Hugging face answer:   jeans
+Blip Answer:           jeans
+
+Question:    What color his  outer garment 
+Hugging face answer:   blue
+Blip Answer:           blue
+
+Question:    Does the person wear any headgear? (Yes or no)
+Hugging face answer:   yes
+Blip Answer:           no
+
+Question:    what the person's headgear type
+Hugging face answer:   baseball cap
+Blip Answer:           baseball cap
+
+Question:    What the color of the person's headgear
+Hugging face answer:   black
+Blip Answer:           black
+
+Question:    does he have a beard (yes or no) ? 
+Hugging face answer:   yes
+Blip Answer:           no
+
+Question:    Is he wearing a face covering? (yes or no)
+Hugging face answer:   no
+Blip Answer:           no
+
+Question:    What color is the face covering?
+Hugging face answer:   black
+Blip Answer:           black
+
+Question:    Does he wear glasses?(yes or no)?
+Hugging face answer:   no
+Blip Answer:           no
+
+Question:    what type of the glasses wear
+Hugging face answer:   sunglasses
+Blip Answer:           sunglasses
+
+Question:    What kind of shirt does he wear
+Hugging face answer:   none
+Blip Answer:           none
+
+Question:    What color is his shirt
+Hugging face answer:   no shirt
+Blip Answer:           no shirt
+
+Question:    Is he wearing a watch( yes or no)?
+Hugging face answer:   yes
+Blip Answer:           no
+
+Question:    What is the color of his watch
+Hugging face answer:   silver
+Blip Answer:           silver
+
+Question:    Is he wearing a belt?
+Hugging face answer:   no
+Blip Answer:           no
+
+Question:    what is the color of his belt
+Hugging face answer:   black
+Blip Answer:           black
+
+Question:    Does he wear a short or long pants 
+Hugging face answer:   long
+Blip Answer:           long
+
+Question:    What type of the pants he wear
+Hugging face answer:   jeans
+Blip Answer:           jeans
+
+Question:    What the color of the person's plants 
+Hugging face answer:   green
+Blip Answer:           green
+
+Question:    does he wear shoes?
+Hugging face answer:   no
+Blip Answer:           no
+
+Question:    what type of his shoes
+Hugging face answer:   sneakers
+Blip Answer:           sneakers
+
+Question:    What brand his shoes
+Hugging face answer:   nike
+Blip Answer:           adidas
+
+
+!!!!! Visibility !!!!!
+Question:    Is the person is a male or female?
+Hugging face answer:   male
+Blip Answer:           male
+
+Question:    What is his age group
+Hugging face answer:   20s
+Blip Answer:           20s
+
+Question:    Does he have head hair?(yes or no)
+Hugging face answer:   yes
+Blip Answer:           yes
+
+Question:    Is his color hair is black?(yes or no)
+Hugging face answer:   equal
+Blip Answer:           no
+
+Question:    Does he have long or short hair
+Hugging face answer:   short
+Blip Answer:           short
+
+
+!!!!! Actions !!!!!
+Question:    Is he holding something in his hand?(yes or no)
+Hugging face answer:   no
+Blip Answer:           no
+
+Question:    In which hand he hold somthing 
+Hugging face answer:   right
+Blip Answer:           right
+
+Question:    What does he hold?
+Hugging face answer:   his butt
+Blip Answer:           his butt
+
+Question:    Does the person eat?
+Hugging face answer:   no
+Blip Answer:           no
+
+Question:    Does the person sitting or standing 
+Hugging face answer:   standing
+Blip Answer:           standing
+

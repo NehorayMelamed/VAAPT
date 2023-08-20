@@ -1,0 +1,5 @@
+noise model = KAYA
+PPP = [2,10]
+crop_size = (192,192)
+data = REDS
+

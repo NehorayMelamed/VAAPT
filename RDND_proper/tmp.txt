@@ -1,0 +1,917 @@
+diff --git a/KAIR_light/README.md b/KAIR_light/README.md
+deleted file mode 100644
+index 8dd33fa..0000000
+--- a/KAIR_light/README.md
++++ /dev/null
+@@ -1,343 +0,0 @@
+-## Training and testing codes for USRNet, DnCNN, FFDNet, SRMD, DPSR, MSRResNet, ESRGAN, BSRGAN, SwinIR, VRT
+-[![download](https://img.shields.io/github/downloads/cszn/KAIR/total.svg)](https://github.com/cszn/KAIR/releases) ![visitors](https://visitor-badge.glitch.me/badge?page_id=cszn/KAIR) 
+-
+-[Kai Zhang](https://cszn.github.io/)
+-
+-*[Computer Vision Lab](https://vision.ee.ethz.ch/the-institute.html), ETH Zurich, Switzerland*
+-
+-_______
+-- **_News (2022-02-15)_**: We release [the training codes](https://github.com/cszn/KAIR/blob/master/docs/README_VRT.md) of [VRT ![GitHub Stars](https://img.shields.io/github/stars/JingyunLiang/VRT?style=social)](https://github.com/JingyunLiang/VRT) for video SR, deblurring and denoising.
+-<p align="center">
+-  <a href="https://github.com/JingyunLiang/VRT">
+-    <img width=30% src="https://raw.githubusercontent.com/JingyunLiang/VRT/main/assets/teaser_vsr.gif"/>
+-    <img width=30% src="https://raw.githubusercontent.com/JingyunLiang/VRT/main/assets/teaser_vdb.gif"/>
+-    <img width=30% src="https://raw.githubusercontent.com/JingyunLiang/VRT/main/assets/teaser_vdn.gif"/>
+-  </a>
+-</p>
+-
+-- **_News (2021-12-23)_**: Our techniques are adopted in [https://www.amemori.ai/](https://www.amemori.ai/).
+-- **_News (2021-12-23)_**: Our new work for practical image denoising.
+-
+-- <img src="figs/palace.png" height="320px"/> <img src="figs/palace_HSCU.png" height="320px"/> 
+-- [<img src="https://github.com/cszn/KAIR/raw/master/figs/denoising_02.png" height="256px"/>](https://imgsli.com/ODczMTc) 
+-[<img src="https://github.com/cszn/KAIR/raw/master/figs/denoising_01.png" height="256px"/>](https://imgsli.com/ODczMTY) 
+-- **_News (2021-09-09)_**: Add [main_download_pretrained_models.py](https://github.com/cszn/KAIR/blob/master/main_download_pretrained_models.py) to download pre-trained models.
+-- **_News (2021-09-08)_**: Add [matlab code](https://github.com/cszn/KAIR/tree/master/matlab) to zoom local part of an image for the purpose of comparison between different results.
+-- **_News (2021-09-07)_**: We upload [the training code](https://github.com/cszn/KAIR/blob/master/docs/README_SwinIR.md) of [SwinIR ![GitHub Stars](https://img.shields.io/github/stars/JingyunLiang/SwinIR?style=social)](https://github.com/JingyunLiang/SwinIR) and provide an [interactive online Colob demo for real-world image SR](https://colab.research.google.com/gist/JingyunLiang/a5e3e54bc9ef8d7bf594f6fee8208533/swinir-demo-on-real-world-image-sr.ipynb). Try to super-resolve your own images on Colab! <a href="https://colab.research.google.com/gist/JingyunLiang/a5e3e54bc9ef8d7bf594f6fee8208533/swinir-demo-on-real-world-image-sr.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="google colab logo"></a>
+-
+-|Real-World Image (x4)|[BSRGAN, ICCV2021](https://github.com/cszn/BSRGAN)|[Real-ESRGAN](https://github.com/xinntao/Real-ESRGAN)|SwinIR (ours)|
+-|      :---      |     :---:        |        :-----:         |        :-----:         | 
+-|<img width="200" src="https://raw.githubusercontent.com/JingyunLiang/SwinIR/main/figs/ETH_LR.png">|<img width="200" src="https://raw.githubusercontent.com/JingyunLiang/SwinIR/main/figs/ETH_BSRGAN.png">|<img width="200" src="https://raw.githubusercontent.com/JingyunLiang/SwinIR/main/figs/ETH_realESRGAN.jpg">|<img width="200" src="https://raw.githubusercontent.com/JingyunLiang/SwinIR/main/figs/ETH_SwinIR.png">
+-|<img width="200" src="https://raw.githubusercontent.com/JingyunLiang/SwinIR/main/figs/OST_009_crop_LR.png">|<img width="200" src="https://raw.githubusercontent.com/JingyunLiang/SwinIR/main/figs/OST_009_crop_BSRGAN.png">|<img width="200" src="https://raw.githubusercontent.com/JingyunLiang/SwinIR/main/figs/OST_009_crop_realESRGAN.png">|<img width="200" src="https://raw.githubusercontent.com/JingyunLiang/SwinIR/main/figs/OST_009_crop_SwinIR.png">|
+-
+-- **_News (2021-08-31)_**: We upload the [training code of BSRGAN](https://github.com/cszn/BSRGAN#training).
+-- **_News (2021-08-24)_**: We upload the BSRGAN degradation model.
+-- **_News (2021-08-22)_**: Support multi-feature-layer VGG perceptual loss and UNet discriminator. 
+-- **_News (2021-08-18)_**: We upload the extended BSRGAN degradation model. It is slightly different from our published version. 
+-
+-- **_News (2021-06-03)_**: Add testing codes of [GPEN (CVPR21)](https://github.com/yangxy/GPEN) for face image enhancement: [main_test_face_enhancement.py](https://github.com/cszn/KAIR/blob/master/main_test_face_enhancement.py)
+-
+-<img src="figs/face_04_comparison.png" width="730px"/> 
+-<img src="figs/face_13_comparison.png" width="730px"/> 
+-<img src="figs/face_08_comparison.png" width="730px"/> 
+-<img src="figs/face_01_comparison.png" width="730px"/> 
+-<img src="figs/face_12_comparison.png" width="730px"/> 
+-<img src="figs/face_10_comparison.png" width="730px"/> 
+-
+-
+-- **_News (2021-05-13)_**: Add [PatchGAN discriminator](https://github.com/cszn/KAIR/blob/master/models/network_discriminator.py).
+-
+-- **_News (2021-05-12)_**: Support distributed training, see also [https://github.com/xinntao/BasicSR/blob/master/docs/TrainTest.md](https://github.com/xinntao/BasicSR/blob/master/docs/TrainTest.md).
+-
+-- **_News (2021-01)_**: [BSRGAN](https://github.com/cszn/BSRGAN) for blind real image super-resolution will be added.
+-
+-- **_Pull requests are welcome!_**
+-
+-- **Correction (2020-10)**: If you use multiple GPUs for GAN training, remove or comment [Line 105](https://github.com/cszn/KAIR/blob/e52a6944c6a40ba81b88430ffe38fd6517e0449e/models/model_gan.py#L105) to enable `DataParallel` for fast training
+-
+-- **News (2020-10)**: Add [utils_receptivefield.py](https://github.com/cszn/KAIR/blob/master/utils/utils_receptivefield.py) to calculate receptive field.
+-
+-- **News (2020-8)**: A `deep plug-and-play image restoration toolbox` is released at [cszn/DPIR](https://github.com/cszn/DPIR).
+-
+-- **Tips (2020-8)**: Use [this](https://github.com/cszn/KAIR/blob/9fd17abff001ab82a22070f7e442bb5246d2d844/main_challenge_sr.py#L147) to avoid `out of memory` issue.
+-
+-- **News (2020-7)**: Add [main_challenge_sr.py](https://github.com/cszn/KAIR/blob/23b0d0f717980e48fad02513ba14045d57264fe1/main_challenge_sr.py#L90) to get `FLOPs`, `#Params`, `Runtime`, `#Activations`, `#Conv`, and `Max Memory Allocated`.
+-```python
+-from utils.utils_modelsummary import get_model_activation, get_model_flops
+-input_dim = (3, 256, 256)  # set the input dimension
+-activations, num_conv2d = get_model_activation(model, input_dim)
+-logger.info('{:>16s} : {:<.4f} [M]'.format('#Activations', activations/10**6))
+-logger.info('{:>16s} : {:<d}'.format('#Conv2d', num_conv2d))
+-flops = get_model_flops(model, input_dim, False)
+-logger.info('{:>16s} : {:<.4f} [G]'.format('FLOPs', flops/10**9))
+-num_parameters = sum(map(lambda x: x.numel(), model.parameters()))
+-logger.info('{:>16s} : {:<.4f} [M]'.format('#Params', num_parameters/10**6))
+-```
+-
+-- **News (2020-6)**: Add [USRNet (CVPR 2020)](https://github.com/cszn/USRNet) for training and testing.
+-  - [Network Architecture](https://github.com/cszn/KAIR/blob/3357aa0e54b81b1e26ceb1cee990f39add235e17/models/network_usrnet.py#L309)
+-  - [Dataset](https://github.com/cszn/KAIR/blob/6c852636d3715bb281637863822a42c72739122a/data/dataset_usrnet.py#L16)
+-
+-
+-Clone repo
+-----------
+-```
+-git clone https://github.com/cszn/KAIR.git
+-```
+-```
+-pip install -r requirement.txt
+-```
+-
+-
+-
+-Training
+-----------
+-
+-You should modify the json file from [options](https://github.com/cszn/KAIR/tree/master/options) first, for example,
+-setting ["gpu_ids": [0,1,2,3]](https://github.com/cszn/KAIR/blob/ff80d265f64de67dfb3ffa9beff8949773c81a3d/options/train_msrresnet_psnr.json#L4) if 4 GPUs are used,
+-setting ["dataroot_H": "trainsets/trainH"](https://github.com/cszn/KAIR/blob/ff80d265f64de67dfb3ffa9beff8949773c81a3d/options/train_msrresnet_psnr.json#L24) if path of the high quality dataset is `trainsets/trainH`.
+-
+-- Training with `DataParallel` - PSNR
+-
+-
+-```python
+-python main_train_psnr.py --opt options/train_msrresnet_psnr.json
+-```
+-
+-- Training with `DataParallel` - GAN
+-
+-```python
+-python main_train_gan.py --opt options/train_msrresnet_gan.json
+-```
+-
+-- Training with `DistributedDataParallel` - PSNR - 4 GPUs
+-
+-```python
+-python -m torch.distributed.launch --nproc_per_node=4 --master_port=1234 main_train_psnr.py --opt options/train_msrresnet_psnr.json  --dist True
+-```
+-
+-- Training with `DistributedDataParallel` - PSNR - 8 GPUs
+-
+-```python
+-python -m torch.distributed.launch --nproc_per_node=8 --master_port=1234 main_train_psnr.py --opt options/train_msrresnet_psnr.json  --dist True
+-```
+-
+-- Training with `DistributedDataParallel` - GAN - 4 GPUs
+-
+-```python
+-python -m torch.distributed.launch --nproc_per_node=4 --master_port=1234 main_train_gan.py --opt options/train_msrresnet_gan.json  --dist True
+-```
+-
+-- Training with `DistributedDataParallel` - GAN - 8 GPUs
+-
+-```python
+-python -m torch.distributed.launch --nproc_per_node=8 --master_port=1234 main_train_gan.py --opt options/train_msrresnet_gan.json  --dist True
+-```
+-
+-- Kill distributed training processes of `main_train_gan.py`
+-
+-```python
+-kill $(ps aux | grep main_train_gan.py | grep -v grep | awk '{print $2}')
+-```
+-
+-----------
+-| Method | Original Link |
+-|---|---|
+-| DnCNN |[https://github.com/cszn/DnCNN](https://github.com/cszn/DnCNN)|
+-| FDnCNN |[https://github.com/cszn/DnCNN](https://github.com/cszn/DnCNN)|
+-| FFDNet | [https://github.com/cszn/FFDNet](https://github.com/cszn/FFDNet)|
+-| SRMD | [https://github.com/cszn/SRMD](https://github.com/cszn/SRMD)|
+-| DPSR-SRResNet | [https://github.com/cszn/DPSR](https://github.com/cszn/DPSR)|
+-| SRResNet | [https://github.com/xinntao/BasicSR](https://github.com/xinntao/BasicSR)|
+-| ESRGAN | [https://github.com/xinntao/ESRGAN](https://github.com/xinntao/ESRGAN)|
+-| RRDB | [https://github.com/xinntao/ESRGAN](https://github.com/xinntao/ESRGAN)|
+-| IMDB | [https://github.com/Zheng222/IMDN](https://github.com/Zheng222/IMDN)|
+-| USRNet | [https://github.com/cszn/USRNet](https://github.com/cszn/USRNet)|
+-| DRUNet | [https://github.com/cszn/DPIR](https://github.com/cszn/DPIR)|
+-| DPIR | [https://github.com/cszn/DPIR](https://github.com/cszn/DPIR)|
+-| BSRGAN | [https://github.com/cszn/BSRGAN](https://github.com/cszn/BSRGAN)|
+-| SwinIR | [https://github.com/JingyunLiang/SwinIR](https://github.com/JingyunLiang/SwinIR)|
+-| VRT | [https://github.com/JingyunLiang/VRT](https://github.com/JingyunLiang/VRT)       |
+-
+-Network architectures
+-----------
+-* [USRNet](https://github.com/cszn/USRNet)
+-
+-  <img src="https://github.com/cszn/USRNet/blob/master/figs/architecture.png" width="600px"/> 
+-
+-* DnCNN
+-
+-  <img src="https://github.com/cszn/DnCNN/blob/master/figs/dncnn.png" width="600px"/> 
+- 
+-* IRCNN denoiser
+-
+- <img src="https://github.com/lipengFu/IRCNN/raw/master/Image/image_2.png" width="680px"/> 
+-
+-* FFDNet
+-
+-  <img src="https://github.com/cszn/FFDNet/blob/master/figs/ffdnet.png" width="600px"/> 
+-
+-* SRMD
+-
+-  <img src="https://github.com/cszn/SRMD/blob/master/figs/architecture.png" width="605px"/> 
+-
+-* SRResNet, SRGAN, RRDB, ESRGAN
+-
+-  <img src="https://github.com/xinntao/ESRGAN/blob/master/figures/architecture.jpg" width="595px"/> 
+-  
+-* IMDN
+-
+-  <img src="figs/imdn.png" width="460px"/>  ----- <img src="figs/imdn_block.png" width="100px"/> 
+-
+-
+-
+-Testing
+-----------
+-|Method | [model_zoo](model_zoo)|
+-|---|---|
+-| [main_test_dncnn.py](main_test_dncnn.py) |```dncnn_15.pth, dncnn_25.pth, dncnn_50.pth, dncnn_gray_blind.pth, dncnn_color_blind.pth, dncnn3.pth```|
+-| [main_test_ircnn_denoiser.py](main_test_ircnn_denoiser.py) | ```ircnn_gray.pth, ircnn_color.pth```| 
+-| [main_test_fdncnn.py](main_test_fdncnn.py) | ```fdncnn_gray.pth, fdncnn_color.pth, fdncnn_gray_clip.pth, fdncnn_color_clip.pth```|
+-| [main_test_ffdnet.py](main_test_ffdnet.py) | ```ffdnet_gray.pth, ffdnet_color.pth, ffdnet_gray_clip.pth, ffdnet_color_clip.pth```|
+-| [main_test_srmd.py](main_test_srmd.py) | ```srmdnf_x2.pth, srmdnf_x3.pth, srmdnf_x4.pth, srmd_x2.pth, srmd_x3.pth, srmd_x4.pth```| 
+-|  | **The above models are converted from MatConvNet.** |
+-| [main_test_dpsr.py](main_test_dpsr.py) | ```dpsr_x2.pth, dpsr_x3.pth, dpsr_x4.pth, dpsr_x4_gan.pth```|
+-| [main_test_msrresnet.py](main_test_msrresnet.py) | ```msrresnet_x4_psnr.pth, msrresnet_x4_gan.pth```|
+-| [main_test_rrdb.py](main_test_rrdb.py) | ```rrdb_x4_psnr.pth, rrdb_x4_esrgan.pth```|
+-| [main_test_imdn.py](main_test_imdn.py) | ```imdn_x4.pth```|
+-
+-[model_zoo](model_zoo)
+---------
+-- download link [https://drive.google.com/drive/folders/13kfr3qny7S2xwG9h7v95F5mkWs0OmU0D](https://drive.google.com/drive/folders/13kfr3qny7S2xwG9h7v95F5mkWs0OmU0D)
+-
+-[trainsets](trainsets)
+-----------
+-- [https://github.com/xinntao/BasicSR/blob/master/docs/DatasetPreparation.md](https://github.com/xinntao/BasicSR/blob/master/docs/DatasetPreparation.md)
+-- [train400](https://github.com/cszn/DnCNN/tree/master/TrainingCodes/DnCNN_TrainingCodes_v1.0/data)
+-- [DIV2K](https://data.vision.ee.ethz.ch/cvl/DIV2K/)
+-- [Flickr2K](https://cv.snu.ac.kr/research/EDSR/Flickr2K.tar)
+-- optional: use [split_imageset(original_dataroot, taget_dataroot, n_channels=3, p_size=512, p_overlap=96, p_max=800)](https://github.com/cszn/KAIR/blob/3ee0bf3e07b90ec0b7302d97ee2adb780617e637/utils/utils_image.py#L123) to get ```trainsets/trainH``` with small images for fast data loading
+-
+-[testsets](testsets)
+------------
+-- [https://github.com/xinntao/BasicSR/blob/master/docs/DatasetPreparation.md](https://github.com/xinntao/BasicSR/blob/master/docs/DatasetPreparation.md)
+-- [set12](https://github.com/cszn/FFDNet/tree/master/testsets)
+-- [bsd68](https://github.com/cszn/FFDNet/tree/master/testsets)
+-- [cbsd68](https://github.com/cszn/FFDNet/tree/master/testsets)
+-- [kodak24](https://github.com/cszn/FFDNet/tree/master/testsets)
+-- [srbsd68](https://github.com/cszn/DPSR/tree/master/testsets/BSD68/GT)
+-- set5
+-- set14
+-- cbsd100
+-- urban100
+-- manga109
+-
+-
+-References
+-----------
+-```BibTex
+-@article{liang2022vrt,
+-title={VRT: A Video Restoration Transformer},
+-author={Liang, Jingyun and Cao, Jiezhang and Fan, Yuchen and Zhang, Kai and Ranjan, Rakesh and Li, Yawei and Timofte, Radu and Van Gool, Luc},
+-journal={arXiv preprint arXiv:2022.00000},
+-year={2022}
+-}
+-@inproceedings{liang2021swinir,
+-title={SwinIR: Image Restoration Using Swin Transformer},
+-author={Liang, Jingyun and Cao, Jiezhang and Sun, Guolei and Zhang, Kai and Van Gool, Luc and Timofte, Radu},
+-booktitle={IEEE International Conference on Computer Vision Workshops},
+-pages={1833--1844},
+-year={2021}
+-}
+-@inproceedings{zhang2021designing,
+-title={Designing a Practical Degradation Model for Deep Blind Image Super-Resolution},
+-author={Zhang, Kai and Liang, Jingyun and Van Gool, Luc and Timofte, Radu},
+-booktitle={IEEE International Conference on Computer Vision},
+-pages={4791--4800},
+-year={2021}
+-}
+-@article{zhang2021plug, % DPIR & DRUNet & IRCNN
+-  title={Plug-and-Play Image Restoration with Deep Denoiser Prior},
+-  author={Zhang, Kai and Li, Yawei and Zuo, Wangmeng and Zhang, Lei and Van Gool, Luc and Timofte, Radu},
+-  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
+-  year={2021}
+-}
+-@inproceedings{zhang2020aim, % efficientSR_challenge
+-  title={AIM 2020 Challenge on Efficient Super-Resolution: Methods and Results},
+-  author={Kai Zhang and Martin Danelljan and Yawei Li and Radu Timofte and others},
+-  booktitle={European Conference on Computer Vision Workshops},
+-  year={2020}
+-}
+-@inproceedings{zhang2020deep, % USRNet
+-  title={Deep unfolding network for image super-resolution},
+-  author={Zhang, Kai and Van Gool, Luc and Timofte, Radu},
+-  booktitle={IEEE Conference on Computer Vision and Pattern Recognition},
+-  pages={3217--3226},
+-  year={2020}
+-}
+-@article{zhang2017beyond, % DnCNN
+-  title={Beyond a gaussian denoiser: Residual learning of deep cnn for image denoising},
+-  author={Zhang, Kai and Zuo, Wangmeng and Chen, Yunjin and Meng, Deyu and Zhang, Lei},
+-  journal={IEEE Transactions on Image Processing},
+-  volume={26},
+-  number={7},
+-  pages={3142--3155},
+-  year={2017}
+-}
+-@inproceedings{zhang2017learning, % IRCNN
+-title={Learning deep CNN denoiser prior for image restoration},
+-author={Zhang, Kai and Zuo, Wangmeng and Gu, Shuhang and Zhang, Lei},
+-booktitle={IEEE conference on computer vision and pattern recognition},
+-pages={3929--3938},
+-year={2017}
+-}
+-@article{zhang2018ffdnet, % FFDNet, FDnCNN
+-  title={FFDNet: Toward a fast and flexible solution for CNN-based image denoising},
+-  author={Zhang, Kai and Zuo, Wangmeng and Zhang, Lei},
+-  journal={IEEE Transactions on Image Processing},
+-  volume={27},
+-  number={9},
+-  pages={4608--4622},
+-  year={2018}
+-}
+-@inproceedings{zhang2018learning, % SRMD
+-  title={Learning a single convolutional super-resolution network for multiple degradations},
+-  author={Zhang, Kai and Zuo, Wangmeng and Zhang, Lei},
+-  booktitle={IEEE Conference on Computer Vision and Pattern Recognition},
+-  pages={3262--3271},
+-  year={2018}
+-}
+-@inproceedings{zhang2019deep, % DPSR
+-  title={Deep Plug-and-Play Super-Resolution for Arbitrary Blur Kernels},
+-  author={Zhang, Kai and Zuo, Wangmeng and Zhang, Lei},
+-  booktitle={IEEE Conference on Computer Vision and Pattern Recognition},
+-  pages={1671--1681},
+-  year={2019}
+-}
+-@InProceedings{wang2018esrgan, % ESRGAN, MSRResNet
+-    author = {Wang, Xintao and Yu, Ke and Wu, Shixiang and Gu, Jinjin and Liu, Yihao and Dong, Chao and Qiao, Yu and Loy, Chen Change},
+-    title = {ESRGAN: Enhanced super-resolution generative adversarial networks},
+-    booktitle = {The European Conference on Computer Vision Workshops (ECCVW)},
+-    month = {September},
+-    year = {2018}
+-}
+-@inproceedings{hui2019lightweight, % IMDN
+-  title={Lightweight Image Super-Resolution with Information Multi-distillation Network},
+-  author={Hui, Zheng and Gao, Xinbo and Yang, Yunchu and Wang, Xiumei},
+-  booktitle={Proceedings of the 27th ACM International Conference on Multimedia (ACM MM)},
+-  pages={2024--2032},
+-  year={2019}
+-}
+-@inproceedings{zhang2019aim, % IMDN
+-  title={AIM 2019 Challenge on Constrained Super-Resolution: Methods and Results},
+-  author={Kai Zhang and Shuhang Gu and Radu Timofte and others},
+-  booktitle={IEEE International Conference on Computer Vision Workshops},
+-  year={2019}
+-}
+-@inproceedings{yang2021gan,
+-    title={GAN Prior Embedded Network for Blind Face Restoration in the Wild},
+-    author={Tao Yang, Peiran Ren, Xuansong Xie, and Lei Zhang},
+-    booktitle={IEEE Conference on Computer Vision and Pattern Recognition},
+-    year={2021}
+-}
+-```
+diff --git a/KAIR_light/docs/README_SwinIR.md b/KAIR_light/docs/README_SwinIR.md
+deleted file mode 100644
+index 52f86e5..0000000
+--- a/KAIR_light/docs/README_SwinIR.md
++++ /dev/null
+@@ -1,194 +0,0 @@
+-# SwinIR: Image Restoration Using Shifted Window Transformer
+-[paper](https://arxiv.org/abs/2108.10257)
+-**|** 
+-[supplementary](https://github.com/JingyunLiang/SwinIR/releases/tag/v0.0)
+-**|** 
+-[visual results](https://github.com/JingyunLiang/SwinIR/releases/tag/v0.0)
+-**|** 
+-[original project page](https://github.com/JingyunLiang/SwinIR)
+-**|**
+-[online Colab demo](https://colab.research.google.com/gist/JingyunLiang/a5e3e54bc9ef8d7bf594f6fee8208533/swinir-demo-on-real-world-image-sr.ipynb)
+-
+-[![arXiv](https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg)](https://arxiv.org/abs/2108.10257)
+-[![GitHub Stars](https://img.shields.io/github/stars/JingyunLiang/SwinIR?style=social)](https://github.com/JingyunLiang/SwinIR)
+-[![download](https://img.shields.io/github/downloads/JingyunLiang/SwinIR/total.svg)](https://github.com/JingyunLiang/SwinIR/releases)
+-[ <a href="https://colab.research.google.com/gist/JingyunLiang/a5e3e54bc9ef8d7bf594f6fee8208533/swinir-demo-on-real-world-image-sr.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="google colab logo"></a>](https://colab.research.google.com/gist/JingyunLiang/a5e3e54bc9ef8d7bf594f6fee8208533/swinir-demo-on-real-world-image-sr.ipynb)
+-
+-> Image restoration is a long-standing low-level vision problem that aims to restore high-quality images from low-quality images (e.g., downscaled, noisy and compressed images). While state-of-the-art image restoration methods are based on convolutional neural networks, few attempts have been made with Transformers which show impressive performance on high-level vision tasks. In this paper, we propose a strong baseline model SwinIR for image restoration based on the Swin Transformer. SwinIR consists of three parts: shallow feature extraction, deep feature extraction and high-quality image reconstruction. In particular, the deep feature extraction module is composed of several residual Swin Transformer blocks (RSTB), each of which has several Swin Transformer layers together with a residual connection. We conduct experiments on three representative tasks: image super-resolution (including classical, lightweight and real-world image super-resolution), image denoising (including grayscale and color image denoising) and JPEG compression artifact reduction. Experimental results demonstrate that SwinIR outperforms state-of-the-art methods on different tasks by up to 0.14~0.45dB, while the total number of parameters can be reduced by up to 67%.
+-
+-
+-### Dataset Preparation
+-
+-Training and testing sets can be downloaded as follows. Please put them in `trainsets` and `testsets` respectively.
+-
+-| Task                 | Training Set | Testing Set|       
+-| :---                 | :---:        |     :---:      |
+-| classical/lightweight image SR          | [DIV2K](https://cv.snu.ac.kr/research/EDSR/DIV2K.tar) (800 training images) or DIV2K +[Flickr2K](https://cv.snu.ac.kr/research/EDSR/Flickr2K.tar) (2650 images) | set5 + Set14 + BSD100 + Urban100 + Manga109 [download all](https://drive.google.com/drive/folders/1B3DJGQKB6eNdwuQIhdskA64qUuVKLZ9u) |
+-| real-world image SR          | SwinIR-M (middle size): [DIV2K](https://cv.snu.ac.kr/research/EDSR/DIV2K.tar) (800 training images) +[Flickr2K](https://cv.snu.ac.kr/research/EDSR/Flickr2K.tar) (2650 images) + [OST](https://openmmlab.oss-cn-hangzhou.aliyuncs.com/datasets/OST_dataset.zip) (10324 images, sky,water,grass,mountain,building,plant,animal) <br /> SwinIR-L (large size): DIV2K + Flickr2K + OST + [WED](http://ivc.uwaterloo.ca/database/WaterlooExploration/exploration_database_and_code.rar)(4744 images) + [FFHQ](https://drive.google.com/drive/folders/1tZUcXDBeOibC6jcMCtgRRz67pzrAHeHL) (first 2000 images, face) + Manga109 (manga) + [SCUT-CTW1500](https://universityofadelaide.box.com/shared/static/py5uwlfyyytbb2pxzq9czvu6fuqbjdh8.zip) (first 100 training images, texts) <br /><br />  ***We use the first practical degradation model [BSRGAN, ICCV2021  ![GitHub Stars](https://img.shields.io/github/stars/cszn/BSRGAN?style=social)](https://github.com/cszn/BSRGAN) for real-world image SR** | [RealSRSet+5images](https://github.com/JingyunLiang/SwinIR/releases/download/v0.0/RealSRSet+5images.zip) | 
+-| color/grayscale image denoising      | [DIV2K](https://cv.snu.ac.kr/research/EDSR/DIV2K.tar) (800 training images) + [Flickr2K](https://cv.snu.ac.kr/research/EDSR/Flickr2K.tar) (2650 images) + [BSD500](http://www.eecs.berkeley.edu/Research/Projects/CS/vision/grouping/BSR/BSR_bsds500.tgz) (400 training&testing images) + [WED](http://ivc.uwaterloo.ca/database/WaterlooExploration/exploration_database_and_code.rar)(4744 images) |  grayscale: Set12 + BSD68 + Urban100 <br />  color: CBSD68 + Kodak24 + McMaster + Urban100 [download all](https://github.com/cszn/FFDNet/tree/master/testsets) | 
+-| JPEG compression artifact reduction  | [DIV2K](https://cv.snu.ac.kr/research/EDSR/DIV2K.tar) (800 training images) + [Flickr2K](https://cv.snu.ac.kr/research/EDSR/Flickr2K.tar) (2650 images) + [BSD500](http://www.eecs.berkeley.edu/Research/Projects/CS/vision/grouping/BSR/BSR_bsds500.tgz) (400 training&testing images) + [WED](http://ivc.uwaterloo.ca/database/WaterlooExploration/exploration_database_and_code.rar)(4744 images) |  grayscale: Classic5 +LIVE1 [download all](https://github.com/cszn/DnCNN/tree/master/testsets) |
+-
+-
+-### Training
+-To train SwinIR, run the following commands. You may need to change the `dataroot_H`, `dataroot_L`, `scale factor`, `noisel level`, `JPEG level`, `G_optimizer_lr`, `G_scheduler_milestones`, etc. in the json file for different settings. 
+-
+-
+-
+-```python
+-# 001 Classical Image SR (middle size)
+-python -m torch.distributed.launch --nproc_per_node=8 --master_port=1234 main_train_psnr.py --opt options/swinir/train_swinir_sr_classical.json  --dist True
+-
+-# 002 Lightweight Image SR (small size)
+-python -m torch.distributed.launch --nproc_per_node=8 --master_port=1234 main_train_psnr.py --opt options/swinir/train_swinir_sr_lightweight.json  --dist True
+-
+-# 003 Real-World Image SR (middle size)
+-python -m torch.distributed.launch --nproc_per_node=8 --master_port=1234 main_train_psnr.py --opt options/swinir/train_swinir_sr_realworld_psnr.json  --dist True
+-# before training gan, put the PSNR-oriented model into superresolution/swinir_sr_realworld_x4_gan/models/
+-python -m torch.distributed.launch --nproc_per_node=8 --master_port=1234 main_train_psnr.py --opt options/swinir/train_swinir_sr_realworld_gan.json  --dist True
+-
+-# 004 Grayscale Image Deoising (middle size)
+-python -m torch.distributed.launch --nproc_per_node=8 --master_port=1234 main_train_psnr.py --opt options/swinir/train_swinir_denoising_gray.json  --dist True
+-
+-# 005 Color Image Deoising (middle size)
+-python -m torch.distributed.launch --nproc_per_node=8 --master_port=1234 main_train_psnr.py --opt options/swinir/train_swinir_denoising_color.json  --dist True
+-
+-# 006 JPEG Compression Artifact Reduction (middle size)
+-python -m torch.distributed.launch --nproc_per_node=8 --master_port=1234 main_train_psnr.py --opt options/swinir/train_swinir_car_jpeg.json  --dist True
+-```
+-
+-You can also train above models using `DataParallel` as follows, but it will be slower.
+-```python
+-# 001 Classical Image SR (middle size)
+-python main_train_psnr.py --opt options/swinir/train_swinir_sr_classical.json
+-
+-...
+-```
+-
+-
+-Note:
+-
+-1, We fine-tune X3/X4/X8 (or noise=25/50, or JPEG=10/20/30) models from the X2 (or noise=15, or JPEG=40) model, so that total_iteration can be halved to save training time. In this case, we halve the initial learning rate and lr_milestones accordingly. This way has similar performance as training from scratch.
+-
+-2, For SR, we use different kinds of `Upsampler` in classical/lightweight/real-world image SR for the purpose of fair comparison with existing works.
+-
+-3, We did not re-train the models after cleaning the codes. Feel free to open an issue if you meet any problems. 
+-
+-## Testing
+-Following command will download the [pretrained models](https://github.com/JingyunLiang/SwinIR/releases/tag/v0.0) and put them in `model_zoo/swinir`. All visual results of SwinIR can be downloaded [here](https://github.com/JingyunLiang/SwinIR/releases/tag/v0.0).
+-
+-If you are too lazy to prepare the datasets, please follow the guide in the [original project page](https://github.com/JingyunLiang/SwinIR#testing-without-preparing-datasets), where you can start testing in a minute. We also provide an [online Colab demo for real-world image SR  <a href="https://colab.research.google.com/gist/JingyunLiang/a5e3e54bc9ef8d7bf594f6fee8208533/swinir-demo-on-real-world-image-sr.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="google colab logo"></a>](https://colab.research.google.com/gist/JingyunLiang/a5e3e54bc9ef8d7bf594f6fee8208533/swinir-demo-on-real-world-image-sr.ipynb) for comparison with [the first practical degradation model BSRGAN (ICCV2021)  ![GitHub Stars](https://img.shields.io/github/stars/cszn/BSRGAN?style=social)](https://github.com/cszn/BSRGAN) and a recent model [RealESRGAN](https://github.com/xinntao/Real-ESRGAN). Try to test your own images on Colab!
+-
+-```bash
+-# 001 Classical Image Super-Resolution (middle size)
+-# Note that --training_patch_size is just used to differentiate two different settings in Table 2 of the paper. Images are NOT tested patch by patch.
+-# (setting1: when model is trained on DIV2K and with training_patch_size=48)
+-python main_test_swinir.py --task classical_sr --scale 2 --training_patch_size 48 --model_path model_zoo/swinir/001_classicalSR_DIV2K_s48w8_SwinIR-M_x2.pth --folder_lq testsets/set5/LR_bicubic/X2 --folder_gt testsets/set5/HR
+-python main_test_swinir.py --task classical_sr --scale 3 --training_patch_size 48 --model_path model_zoo/swinir/001_classicalSR_DIV2K_s48w8_SwinIR-M_x3.pth --folder_lq testsets/set5/LR_bicubic/X3 --folder_gt testsets/set5/HR
+-python main_test_swinir.py --task classical_sr --scale 4 --training_patch_size 48 --model_path model_zoo/swinir/001_classicalSR_DIV2K_s48w8_SwinIR-M_x4.pth --folder_lq testsets/set5/LR_bicubic/X4 --folder_gt testsets/set5/HR
+-python main_test_swinir.py --task classical_sr --scale 8 --training_patch_size 48 --model_path model_zoo/swinir/001_classicalSR_DIV2K_s48w8_SwinIR-M_x8.pth --folder_lq testsets/set5/LR_bicubic/X8 --folder_gt testsets/set5/HR
+-
+-# (setting2: when model is trained on DIV2K+Flickr2K and with training_patch_size=64)
+-python main_test_swinir.py --task classical_sr --scale 2 --training_patch_size 64 --model_path model_zoo/swinir/001_classicalSR_DF2K_s64w8_SwinIR-M_x2.pth --folder_lq testsets/set5/LR_bicubic/X2 --folder_gt testsets/set5/HR
+-python main_test_swinir.py --task classical_sr --scale 3 --training_patch_size 64 --model_path model_zoo/swinir/001_classicalSR_DF2K_s64w8_SwinIR-M_x3.pth --folder_lq testsets/set5/LR_bicubic/X3 --folder_gt testsets/set5/HR
+-python main_test_swinir.py --task classical_sr --scale 4 --training_patch_size 64 --model_path model_zoo/swinir/001_classicalSR_DF2K_s64w8_SwinIR-M_x4.pth --folder_lq testsets/set5/LR_bicubic/X4 --folder_gt testsets/set5/HR
+-python main_test_swinir.py --task classical_sr --scale 8 --training_patch_size 64 --model_path model_zoo/swinir/001_classicalSR_DF2K_s64w8_SwinIR-M_x8.pth --folder_lq testsets/set5/LR_bicubic/X8 --folder_gt testsets/set5/HR
+-
+-
+-# 002 Lightweight Image Super-Resolution (small size)
+-python main_test_swinir.py --task lightweight_sr --scale 2 --model_path model_zoo/swinir/002_lightweightSR_DIV2K_s64w8_SwinIR-S_x2.pth --folder_lq testsets/set5/LR_bicubic/X2 --folder_gt testsets/set5/HR
+-python main_test_swinir.py --task lightweight_sr --scale 3 --model_path model_zoo/swinir/002_lightweightSR_DIV2K_s64w8_SwinIR-S_x3.pth --folder_lq testsets/set5/LR_bicubic/X3 --folder_gt testsets/set5/HR
+-python main_test_swinir.py --task lightweight_sr --scale 4 --model_path model_zoo/swinir/002_lightweightSR_DIV2K_s64w8_SwinIR-S_x4.pth --folder_lq testsets/set5/LR_bicubic/X4 --folder_gt testsets/set5/HR
+-
+-
+-# 003 Real-World Image Super-Resolution (use --tile 400 if you run out-of-memory)
+-# (middle size)
+-python main_test_swinir.py --task real_sr --scale 4 --model_path model_zoo/swinir/003_realSR_BSRGAN_DFO_s64w8_SwinIR-M_x4_GAN.pth --folder_lq testsets/RealSRSet+5images
+-
+-# (larger size + trained on more datasets)
+-python main_test_swinir.py --task real_sr --scale 4 --large_model --model_path model_zoo/swinir/003_realSR_BSRGAN_DFOWMFC_s64w8_SwinIR-L_x4_GAN.pth --folder_lq testsets/RealSRSet+5images
+-
+-
+-# 004 Grayscale Image Deoising (middle size)
+-python main_test_swinir.py --task gray_dn --noise 15 --model_path model_zoo/swinir/004_grayDN_DFWB_s128w8_SwinIR-M_noise15.pth --folder_gt testsets/set12
+-python main_test_swinir.py --task gray_dn --noise 25 --model_path model_zoo/swinir/004_grayDN_DFWB_s128w8_SwinIR-M_noise25.pth --folder_gt testsets/set12
+-python main_test_swinir.py --task gray_dn --noise 50 --model_path model_zoo/swinir/004_grayDN_DFWB_s128w8_SwinIR-M_noise50.pth --folder_gt testsets/set12
+-
+-
+-# 005 Color Image Deoising (middle size)
+-python main_test_swinir.py --task color_dn --noise 15 --model_path model_zoo/swinir/005_colorDN_DFWB_s128w8_SwinIR-M_noise15.pth --folder_gt testsets/McMaster
+-python main_test_swinir.py --task color_dn --noise 25 --model_path model_zoo/swinir/005_colorDN_DFWB_s128w8_SwinIR-M_noise25.pth --folder_gt testsets/McMaster
+-python main_test_swinir.py --task color_dn --noise 50 --model_path model_zoo/swinir/005_colorDN_DFWB_s128w8_SwinIR-M_noise50.pth --folder_gt testsets/McMaster
+-
+-
+-# 006 JPEG Compression Artifact Reduction (middle size, using window_size=7 because JPEG encoding uses 8x8 blocks)
+-python main_test_swinir.py --task jpeg_car --jpeg 10 --model_path model_zoo/swinir/006_CAR_DFWB_s126w7_SwinIR-M_jpeg10.pth --folder_gt testsets/classic5
+-python main_test_swinir.py --task jpeg_car --jpeg 20 --model_path model_zoo/swinir/006_CAR_DFWB_s126w7_SwinIR-M_jpeg20.pth --folder_gt testsets/classic5
+-python main_test_swinir.py --task jpeg_car --jpeg 30 --model_path model_zoo/swinir/006_CAR_DFWB_s126w7_SwinIR-M_jpeg30.pth --folder_gt testsets/classic5
+-python main_test_swinir.py --task jpeg_car --jpeg 40 --model_path model_zoo/swinir/006_CAR_DFWB_s126w7_SwinIR-M_jpeg40.pth --folder_gt testsets/classic5
+-```
+-
+----
+-
+-## Results
+-<details>
+-<summary>Classical Image Super-Resolution (click me)</summary>
+-<p align="center">
+-  <img width="900" src="https://raw.githubusercontent.com/JingyunLiang/SwinIR/main/figs/classic_image_sr.png">
+-  <img width="900" src="https://raw.githubusercontent.com/JingyunLiang/SwinIR/main/figs/classic_image_sr_visual.png">
+-</p>
+-</details>
+-
+-<details>
+-<summary>Lightweight Image Super-Resolution</summary>
+-<p align="center">
+-  <img width="900" src="https://raw.githubusercontent.com/JingyunLiang/SwinIR/main/figs/lightweight_image_sr.png">
+-</p>
+-</details>
+-
+-<details>
+-<summary>Real-World Image Super-Resolution</summary>
+-<p align="center">
+-  <img width="900" src="https://raw.githubusercontent.com/JingyunLiang/SwinIR/main/figs/real_world_image_sr.png">
+-</p>
+-</details>
+-
+-
+-|&nbsp;&nbsp;&nbsp; Real-World Image (x4)|[BSRGAN, ICCV2021](https://github.com/cszn/BSRGAN)|[Real-ESRGAN](https://github.com/xinntao/Real-ESRGAN)|SwinIR (ours)|
+-|      :---      |     :---:        |        :-----:         |        :-----:         | 
+-|<img width="200" src="https://raw.githubusercontent.com/JingyunLiang/SwinIR/main/figs/ETH_LR.png">|<img width="200" src="https://raw.githubusercontent.com/JingyunLiang/SwinIR/main/figs/ETH_BSRGAN.png">|<img width="200" src="https://raw.githubusercontent.com/JingyunLiang/SwinIR/main/figs/ETH_realESRGAN.jpg">|<img width="200" src="https://raw.githubusercontent.com/JingyunLiang/SwinIR/main/figs/ETH_SwinIR.png">
+-|<img width="200" src="https://raw.githubusercontent.com/JingyunLiang/SwinIR/main/figs/OST_009_crop_LR.png">|<img width="200" src="https://raw.githubusercontent.com/JingyunLiang/SwinIR/main/figs/OST_009_crop_BSRGAN.png">|<img width="200" src="https://raw.githubusercontent.com/JingyunLiang/SwinIR/main/figs/OST_009_crop_realESRGAN.png">|<img width="200" src="https://raw.githubusercontent.com/JingyunLiang/SwinIR/main/figs/OST_009_crop_SwinIR.png">|
+-
+-<details>
+-<summary>Grayscale Image Deoising</summary>
+-<p align="center">
+-  <img width="900" src="https://raw.githubusercontent.com/JingyunLiang/SwinIR/main/figs/gray_image_denoising.png">
+-</p>
+-</details>
+-
+-<details>
+-<summary>Color Image Deoising</summary>
+-<p align="center">
+-  <img width="900" src="https://raw.githubusercontent.com/JingyunLiang/SwinIR/main/figs/color_image_denoising.png">
+-</p>
+-</details>
+-
+-<details>
+-<summary>JPEG Compression Artifact Reduction</summary>
+-<p align="center">
+-  <img width="900" src="https://raw.githubusercontent.com/JingyunLiang/SwinIR/main/figs/jepg_compress_artfact_reduction.png">
+-</p>
+-</details>
+-
+-
+-
+-Please refer to the [paper](https://arxiv.org/abs/2108.10257) and the [original project page](https://github.com/JingyunLiang/SwinIR)
+-for more results.
+-
+-
+-## Citation
+-    @article{liang2021swinir,
+-        title={SwinIR: Image Restoration Using Swin Transformer},
+-        author={Liang, Jingyun and Cao, Jiezhang and Sun, Guolei and Zhang, Kai and Van Gool, Luc and Timofte, Radu},
+-        journal={arXiv preprint arXiv:2108.10257}, 
+-        year={2021}
+-    }
+diff --git a/KAIR_light/docs/README_VRT.md b/KAIR_light/docs/README_VRT.md
+deleted file mode 100644
+index bb4e0d2..0000000
+--- a/KAIR_light/docs/README_VRT.md
++++ /dev/null
+@@ -1,191 +0,0 @@
+-# [VRT: A Video Restoration Transformer](https://github.com/JingyunLiang/VRT)
+-[arxiv](https://arxiv.org/abs/2201.12288)
+-**|** 
+-[supplementary](https://github.com/JingyunLiang/VRT/releases/download/v0.0/VRT_supplementary.pdf)
+-**|** 
+-[pretrained models](https://github.com/JingyunLiang/VRT/releases)
+-**|** 
+-[visual results](https://github.com/JingyunLiang/VRT/releases)
+-**|** 
+-[original project page](https://github.com/JingyunLiang/VRT)
+-
+-[![arXiv](https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg)](https://arxiv.org/abs/2201.12288)
+-[![GitHub Stars](https://img.shields.io/github/stars/JingyunLiang/VRT?style=social)](https://github.com/JingyunLiang/VRT)
+-[![download](https://img.shields.io/github/downloads/JingyunLiang/VRT/total.svg)](https://github.com/JingyunLiang/VRT/releases)
+-![visitors](https://visitor-badge.glitch.me/badge?page_id=jingyunliang/VRT)
+-[ <a href="https://colab.research.google.com/gist/JingyunLiang/deb335792768ad9eb73854a8efca4fe0#file-vrt-demo-on-video-restoration-ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="google colab logo"></a>](https://colab.research.google.com/gist/JingyunLiang/deb335792768ad9eb73854a8efca4fe0#file-vrt-demo-on-video-restoration-ipynb)
+-
+-This is the readme of "VRT: A Video Restoration Transformer"
+-([arxiv](https://arxiv.org/pdf/2201.12288.pdf), [supp](https://github.com/JingyunLiang/VRT/releases/download/v0.0/VRT_supplementary.pdf), [pretrained models](https://github.com/JingyunLiang/VRT/releases), [visual results](https://github.com/JingyunLiang/VRT/releases)). VRT ahcieves state-of-the-art performance **(up to 2.16dB)** in
+-- video SR (REDS, Vimeo90K, Vid4 and UDM10)
+-- video deblurring (GoPro, DVD and REDS)
+-- video denoising (DAVIS and Set8)
+-
+-<p align="center">
+-  <a href="https://github.com/JingyunLiang/VRT/releases">
+-    <img width=30% src="https://raw.githubusercontent.com/JingyunLiang/VRT/main/assets/teaser_vsr.gif"/>
+-    <img width=30% src="https://raw.githubusercontent.com/JingyunLiang/VRT/main/assets/teaser_vdb.gif"/>
+-    <img width=30% src="https://raw.githubusercontent.com/JingyunLiang/VRT/main/assets/teaser_vdn.gif"/>
+-  </a>
+-</p>
+-
+----
+-
+-> Video restoration (e.g., video super-resolution) aims to restore high-quality frames from low-quality frames. Different from single image restoration, video restoration generally requires to utilize temporal information from multiple adjacent but usually misaligned video frames. Existing deep methods generally tackle with this by exploiting a sliding window strategy or a recurrent architecture, which either is restricted by frame-by-frame restoration or lacks long-range modelling ability. In this paper, we propose a Video Restoration Transformer (VRT) with parallel frame prediction and long-range temporal dependency modelling abilities. More specifically, VRT is composed of multiple scales, each of which consists of two kinds of modules: temporal mutual self attention (TMSA) and parallel warping. TMSA divides the video into small clips, on which mutual attention is applied for joint motion estimation, feature alignment and feature fusion, while self-attention is used for feature extraction. To enable cross-clip interactions, the video sequence is shifted for every other layer. Besides, parallel warping is used to further fuse information from neighboring frames by parallel feature warping. Experimental results on three tasks, including video super-resolution, video deblurring and video denoising, demonstrate that VRT outperforms the state-of-the-art methods by large margins (**up to 2.16 dB**) on nine benchmark datasets.
+-<p align="center">
+-  <img width="800" src="https://raw.githubusercontent.com/JingyunLiang/VRT/main/assets/framework.jpeg">
+-</p>
+-
+-#### Contents
+-
+-1. [Requirements](#Requirements)
+-1. [Quick Testing](#Quick-Testing)
+-1. [Training](#Training)
+-1. [Results](#Results)
+-1. [Citation](#Citation)
+-1. [License and Acknowledgement](#License-and-Acknowledgement)
+-
+-
+-## Requirements
+-> - Python 3.8, PyTorch >= 1.9.1
+-> - Requirements: see requirements.txt
+-> - Platforms: Ubuntu 18.04, cuda-11.1
+-
+-## Quick Testing
+-Following commands will download [pretrained models](https://github.com/JingyunLiang/VRT/releases) and [test datasets](https://github.com/JingyunLiang/VRT/releases) **automatically** (except Vimeo-90K testing set). If out-of-memory, try to reduce `--tile` at the expense of slightly decreased performance.
+-
+-You can also try to test it on Colab[ <a href="https://colab.research.google.com/gist/JingyunLiang/deb335792768ad9eb73854a8efca4fe0#file-vrt-demo-on-video-restoration-ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="google colab logo"></a>](https://colab.research.google.com/gist/JingyunLiang/deb335792768ad9eb73854a8efca4fe0#file-vrt-demo-on-video-restoration-ipynb), but the results may be slightly different due to `--tile` difference.
+-```bash
+-# download code
+-git clone https://github.com/JingyunLiang/VRT
+-cd VRT
+-pip install -r requirements.txt
+-
+-# 001, video sr trained on REDS (6 frames), tested on REDS4
+-python main_test_vrt.py --task 001_VRT_videosr_bi_REDS_6frames --folder_lq testsets/REDS4/sharp_bicubic --folder_gt testsets/REDS4/GT --tile 40 128 128 --tile_overlap 2 20 20
+-
+-# 002, video sr trained on REDS (16 frames), tested on REDS4
+-python main_test_vrt.py --task 002_VRT_videosr_bi_REDS_16frames --folder_lq testsets/REDS4/sharp_bicubic --folder_gt testsets/REDS4/GT --tile 40 128 128 --tile_overlap 2 20 20
+-
+-# 003, video sr trained on Vimeo (bicubic), tested on Vid4 and Vimeo
+-python main_test_vrt.py --task 003_VRT_videosr_bi_Vimeo_7frames --folder_lq testsets/Vid4/BIx4 --folder_gt testsets/Vid4/GT --tile 32 128 128 --tile_overlap 2 20 20
+-python main_test_vrt.py --task 003_VRT_videosr_bi_Vimeo_7frames --folder_lq testsets/vimeo90k/vimeo_septuplet_matlabLRx4/sequences --folder_gt testsets/vimeo90k/vimeo_septuplet/sequences --tile 8 0 0 --tile_overlap 0 20 20
+-
+-# 004, video sr trained on Vimeo (blur-downsampling), tested on Vid4, UDM10 and Vimeo
+-python main_test_vrt.py --task 004_VRT_videosr_bd_Vimeo_7frames --folder_lq testsets/Vid4/BDx4 --folder_gt testsets/Vid4/GT --tile 32 128 128 --tile_overlap 2 20 20
+-python main_test_vrt.py --task 004_VRT_videosr_bd_Vimeo_7frames --folder_lq testsets/UDM10/BDx4 --folder_gt testsets/UDM10/GT --tile 32 128 128 --tile_overlap 2 20 20
+-python main_test_vrt.py --task 004_VRT_videosr_bd_Vimeo_7frames --folder_lq testsets/vimeo90k/vimeo_septuplet_BDLRx4/sequences --folder_gt testsets/vimeo90k/vimeo_septuplet/sequences --tile 8 0 0 --tile_overlap 0 20 20
+-
+-# 005, video deblurring trained and tested on DVD
+-python main_test_vrt.py --task 005_VRT_videodeblurring_DVD --folder_lq testsets/DVD10/test_GT_blurred --folder_gt testsets/DVD10/test_GT --tile 12 256 256 --tile_overlap 2 20 20
+-
+-# 006, video deblurring trained and tested on GoPro
+-python main_test_vrt.py --task 006_VRT_videodeblurring_GoPro --folder_lq testsets/GoPro11/test_GT_blurred --folder_gt testsets/GoPro11/test_GT --tile 18 192 192 --tile_overlap 2 20 20
+-
+-# 007, video deblurring trained on REDS, tested on REDS4
+-python main_test_vrt.py --task 007_VRT_videodeblurring_REDS --folder_lq testsets/REDS4/blur --folder_gt testsets/REDS4/GT --tile 12 256 256 --tile_overlap 2 20 20
+-
+-# 008, video denoising trained on DAVIS (noise level 0-50) and tested on Set8 and DAVIS
+-python main_test_vrt.py --task 008_VRT_videodenoising_DAVIS --sigma 10 --folder_lq testsets/Set8 --folder_gt testsets/Set8 --tile 12 256 256 --tile_overlap 2 20 20
+-python main_test_vrt.py --task 008_VRT_videodenoising_DAVIS --sigma 10  --folder_lq testsets/DAVIS-test --folder_gt testsets/DAVIS-test --tile 12 256 256 --tile_overlap 2 20 20
+-
+-# test on your own datasets (an example)
+-python main_test_vrt.py --task 001_VRT_videosr_bi_REDS_6frames --folder_lq testsets/your/own --tile 40 128 128 --tile_overlap 2 20 20
+-```
+-
+-**All visual results of VRT can be downloaded [here](https://github.com/JingyunLiang/VRT/releases)**.
+-
+-
+-## Training
+-The training and testing sets are as follows (see the [supplementary](https://github.com/JingyunLiang/VRT/releases) for a detailed introduction of all datasets). For better I/O speed, use commands like `python scripts/data_preparation/create_lmdb.py --dataset reds` to convert `.png` datasets to `.lmdb` datasets.
+-
+-Note: You do **NOT need** to prepare the datasets if you just want to test the model. `main_test_vrt.py` will download the testing set automaticaly.
+-
+-
+-| Task                                                          |                                                                                                                                                                                                                                    Training Set                                                                                                                                                                                                                                     |                                                                                                                                                                                                                                                                                 Testing Set                                                                                                                                                                                                                                                                                  |        Pretrained Model and Visual Results of VRT  |
+-|:--------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|    :---:      |
+-| video SR (setting 1, BI)                                      |                                                                                 [REDS sharp & sharp_bicubic](https://seungjunnah.github.io/Datasets/reds.html) (266 videos, 266000 frames: train + val except REDS4)   <br  /><br  /> *Use  [regroup_reds_dataset.py](https://github.com/cszn/KAIR/tree/master/scripts/data_preparation/regroup_reds_dataset.py) to regroup and rename REDS val set                                                                                 |                                                                                                                                                                                                                                                           REDS4 (4 videos, 400 frames: 000, 011, 015, 020 of REDS)                                                                                                                                                                                                                                                           | [here](https://github.com/JingyunLiang/VRT/releases) |
+-| video SR (setting 2 & 3, BI & BD)                             |    [Vimeo90K](http://data.csail.mit.edu/tofu/dataset/vimeo_septuplet.zip) (64612 seven-frame videos as in `sep_trainlist.txt`)  <br  /><br  /> * Use [generate_LR_Vimeo90K.m](https://github.com/cszn/KAIR/tree/master/scripts/matlab_scripts/generate_LR_Vimeo90K.m) and [generate_LR_Vimeo90K_BD.m](https://github.com/cszn/KAIR/tree/master/scripts/matlab_scripts/generate_LR_Vimeo90K_BD.m) to generate LR frames for bicubic and blur-downsampling VSR, respectively.    |                                                                       Vimeo90K-T (the rest 7824 7-frame videos) + [Vid4](https://drive.google.com/file/d/1ZuvNNLgR85TV_whJoHM7uVb-XW1y70DW/view) (4 videos) + [UDM10](https://www.terabox.com/web/share/link?surl=LMuQCVntRegfZSxn7s3hXw&path=%2Fproject%2Fpfnl) (10 videos)  <br  /><br  /> *Use [prepare_UDM10.py](https://github.com/cszn/KAIR/tree/master/scripts/data_preparation/prepare_UDM10.py) to regroup and rename the UDM10 dataset                                                                        | [here](https://github.com/JingyunLiang/VRT/releases) |
+-| video deblurring (setting 1, motion blur)                     |                                                                                            [DVD](http://www.cs.ubc.ca/labs/imager/tr/2017/DeepVideoDeblurring/DeepVideoDeblurring_Dataset.zip) (61 videos, 5708 frames)  <br  /><br  /> *Use [prepare_DVD.py](https://github.com/cszn/KAIR/tree/master/scripts/data_preparation/prepare_DVD.py) to regroup and rename the dataset.                                                                                             |                                                                                                                                                                              DVD (10 videos, 1000 frames)             <br  /><br  /> *Use [evaluate_video_deblurring.m](https://github.com/cszn/KAIR/tree/master/scripts/matlab_scripts/evaluate_video_deblurring.m) for final evaluation.                                                                                                                                                                              | [here](https://github.com/JingyunLiang/VRT/releases) |
+-| video deblurring (setting 2, motion blur)                     |                                                                                             [GoPro](http://data.cv.snu.ac.kr:8008/webdav/dataset/GOPRO/GOPRO_Large.zip) (22 videos, 2103 frames)  <br  /><br  /> *Use [prepare_GoPro_as_video.py](https://github.com/cszn/KAIR/tree/master/scripts/data_preparation/prepare_GoPro_as_video.py) to regroup and rename the dataset.                                                                                              |                                                                                                                                                                                  GoPro (11 videos, 1111 frames)  <br  /><br  /> *Use [evaluate_video_deblurring.m](https://github.com/cszn/KAIR/tree/master/scripts/matlab_scripts/evaluate_video_deblurring.m) for final evaluation.                                                                                                                                                                                   | [here](https://github.com/JingyunLiang/VRT/releases) |
+-| video deblurring (setting 3, motion blur)                     |                                                         [REDS sharp & blur](https://seungjunnah.github.io/Datasets/reds.html) (266 videos, 266000 frames: train & val except REDS4)   <br  /><br  /> *Use  [regroup_reds_dataset.py](https://github.com/cszn/KAIR/tree/master/scripts/data_preparation/regroup_reds_dataset.py) to regroup and rename REDS val set. Note that it shares the same HQ frames as in VSR.                                                          |                                                                                                                                                                                                                                                           REDS4 (4 videos, 400 frames: 000, 011, 015, 020 of REDS)                                                                                                                                                                                                                                                           | [here](https://github.com/JingyunLiang/VRT/releases) |
+-| video denoising (Gaussian noise)                              |                                                                                                                                             [DAVIS-2017](https://data.vision.ee.ethz.ch/csergi/share/davis/DAVIS-2017-Unsupervised-trainval-480p.zip) (90 videos, 6208 frames)  <br  /><br  /> *Use all files in DAVIS/JPEGImages/480p                                                                                                                                              |                                                                                                              [DAVIS-2017-test](https://github.com/JingyunLiang/VRT/releases) (30 videos) + [Set8](https://www.dropbox.com/sh/20n4cscqkqsfgoj/AABGftyJuJDwuCLGczL-fKvBa/test_sequences?dl=0&subfolder_nav_tracking=1) (8 videos: tractor, touchdown, park_joy and sunflower selected from DERF + hypersmooth, motorbike, rafting and snowboard from GOPRO_540P)                                                                                                               | [here](https://github.com/JingyunLiang/VRT/releases) |
+-
+-Run following commands for training:
+-```bash
+-# download code
+-git clone https://github.com/cszn/KAIR
+-cd KAIR
+-pip install -r requirements.txt
+-
+-# 001, video sr trained on REDS (6 frames), tested on REDS4
+-python -m torch.distributed.launch --nproc_per_node=8 --master_port=1234 main_train_vrt.py --opt options/vrt/001_train_vrt_videosr_bi_reds_6frames.json  --dist True
+-
+-# 002, video sr trained on REDS (16 frames), tested on REDS4
+-python -m torch.distributed.launch --nproc_per_node=8 --master_port=1234 main_train_vrt.py --opt options/vrt/002_train_vrt_videosr_bi_reds_16frames.json  --dist True
+-
+-# 003, video sr trained on Vimeo (bicubic), tested on Vid4 and Vimeo
+-python -m torch.distributed.launch --nproc_per_node=8 --master_port=1234 main_train_vrt.py --opt options/vrt/003_train_vrt_videosr_bi_vimeo_7frames.json  --dist True
+-
+-# 004, video sr trained on Vimeo (blur-downsampling), tested on Vid4, Vimeo and UDM10
+-python -m torch.distributed.launch --nproc_per_node=8 --master_port=1234 main_train_vrt.py --opt options/vrt/004_train_vrt_videosr_bd_vimeo_7frames.json  --dist True
+-
+-# 005, video deblurring trained and tested on DVD
+-python -m torch.distributed.launch --nproc_per_node=8 --master_port=1234 main_train_vrt.py --opt options/vrt/005_train_vrt_videodeblurring_dvd.json  --dist True
+-
+-# 006, video deblurring trained and tested on GoPro
+-python -m torch.distributed.launch --nproc_per_node=8 --master_port=1234 main_train_vrt.py --opt options/vrt/006_train_vrt_videodeblurring_gopro.json  --dist True
+-
+-# 007, video deblurring trained on REDS, tested on REDS4
+-python -m torch.distributed.launch --nproc_per_node=8 --master_port=1234 main_train_vrt.py --opt options/vrt/007_train_vrt_videodeblurring_reds.json  --dist True
+-
+-# 008, video denoising trained on DAVIS (noise level 0-50) and tested on Set8 and DAVIS
+-python -m torch.distributed.launch --nproc_per_node=8 --master_port=1234 main_train_vrt.py --opt options/vrt/008_train_vrt_videodenoising_davis.json  --dist True
+-```
+-Tip: The training process will terminate automatically at 20000 iteration due to a bug. Just resume training after that.
+-<details>
+-<summary>Bug</summary>
+-Bug: PyTorch DistributedDataParallel (DDP) does not support `torch.utils.checkpoint` well. To alleviate the problem, set `find_unused_parameters=False` when `use_checkpoint=True`. If there are other errors, make sure that unused parameters will not change during training loop and set `use_static_graph=True`.
+-
+-If you find a better solution, feel free to pull a request. Thank you.
+-</details>
+-
+-## Results
+-We achieved state-of-the-art performance on video SR, video deblurring and video denoising. Detailed results can be found in the [paper](https://arxiv.org/abs/2201.12288).
+-
+-<details>
+-<summary>Video Super-Resolution (click me)</summary>
+-<p align="center">
+-  <img width="900" src="https://raw.githubusercontent.com/JingyunLiang/VRT/main/assets/vsr.jpeg">
+-  <img width="900" src="https://raw.githubusercontent.com/JingyunLiang/VRT/main/assets/vsr_visual.jpeg">
+-</p>
+-</details>
+-
+-<details>
+-<summary>Video Deblurring</summary>
+-<p align="center">
+-  <img width="900" src="https://raw.githubusercontent.com/JingyunLiang/VRT/main/assets/vdb_dvd_gopro.jpeg">
+-  <img width="900" src="https://raw.githubusercontent.com/JingyunLiang/VRT/main/assets/vdb_visual.jpeg">
+-  <img width="350" src="https://raw.githubusercontent.com/JingyunLiang/VRT/main/assets/vdb_reds.jpeg">
+-</p>
+-</details>
+-
+-<details>
+-<summary>Video Denoising</summary>
+-<p align="center">
+-  <img width="350" src="https://raw.githubusercontent.com/JingyunLiang/VRT/main/assets/vdn.jpeg">
+-</p>
+-</details>
+-
+-
+-## Citation
+-    @article{liang2022vrt,
+-        title={VRT: A Video Restoration Transformer},
+-        author={Liang, Jingyun and Cao, Jiezhang and Fan, Yuchen and Zhang, Kai and Ranjan, Rakesh and Li, Yawei and Timofte, Radu and Van Gool, Luc},
+-        journal={arXiv preprint arXiv:2201.12288},
+-        year={2022}
+-    }
+-
+-
+-## License and Acknowledgement
+-This project is released under the CC-BY-NC license. We refer to codes from [KAIR](https://github.com/cszn/KAIR), [BasicSR](https://github.com/xinntao/BasicSR), [Video Swin Transformer](https://github.com/SwinTransformer/Video-Swin-Transformer) and [mmediting](https://github.com/open-mmlab/mmediting). Thanks for their awesome works. The majority of VRT is licensed under CC-BY-NC, however portions of the project are available under separate license terms: KAIR is licensed under the MIT License, BasicSR, Video Swin Transformer and mmediting are licensed under the Apache 2.0 license.
+\ No newline at end of file
+diff --git a/KAIR_light/kernels/Levin09.mat b/KAIR_light/kernels/Levin09.mat
+deleted file mode 100644
+index d2adbd3..0000000
+Binary files a/KAIR_light/kernels/Levin09.mat and /dev/null differ
+diff --git a/KAIR_light/kernels/kernels_12.mat b/KAIR_light/kernels/kernels_12.mat
+deleted file mode 100644
+index afedf2c..0000000
+Binary files a/KAIR_light/kernels/kernels_12.mat and /dev/null differ
+diff --git a/KAIR_light/kernels/kernels_bicubicx234.mat b/KAIR_light/kernels/kernels_bicubicx234.mat
+deleted file mode 100644
+index 0d88b86..0000000
+Binary files a/KAIR_light/kernels/kernels_bicubicx234.mat and /dev/null differ
+diff --git a/KAIR_light/kernels/srmd_pca_matlab.mat b/KAIR_light/kernels/srmd_pca_matlab.mat
+deleted file mode 100644
+index 8fb2f8c..0000000
+Binary files a/KAIR_light/kernels/srmd_pca_matlab.mat and /dev/null differ
+diff --git a/KAIR_light/matlab/README.md b/KAIR_light/matlab/README.md
+deleted file mode 100644
+index d7c6717..0000000
+--- a/KAIR_light/matlab/README.md
++++ /dev/null
+@@ -1,17 +0,0 @@
+-
+-
+-Run matlab file [main_denoising_gray.m](https://github.com/cszn/KAIR/blob/master/matlab/main_denoising_gray.m) for local zoom.
+-
+-```matlab
+-upperleft_pixel =  [172, 218];
+-box             =  [35, 35];
+-zoomfactor      =  3;
+-zoom_position   =  'ur';  % 'ur' = 'upper-right'
+-nline           =  2;
+-```
+-
+-<img src="https://github.com/cszn/KAIR/blob/master/matlab/denoising_gray/05_drunet_2731.png" width="256px"/> <img src="https://github.com/cszn/KAIR/blob/master/matlab/denoising_gray_results/05_drunet_2731.png" width="256px"/>
+-
+-
+-
+-
+diff --git a/KAIR_light/models/op/fused_bias_act.cpp b/KAIR_light/models/op/fused_bias_act.cpp
+deleted file mode 100644
+index 02be898..0000000
+--- a/KAIR_light/models/op/fused_bias_act.cpp
++++ /dev/null
+@@ -1,21 +0,0 @@
+-#include <torch/extension.h>
+-
+-
+-torch::Tensor fused_bias_act_op(const torch::Tensor& input, const torch::Tensor& bias, const torch::Tensor& refer,
+-    int act, int grad, float alpha, float scale);
+-
+-#define CHECK_CUDA(x) TORCH_CHECK(x.type().is_cuda(), #x " must be a CUDA tensor")
+-#define CHECK_CONTIGUOUS(x) TORCH_CHECK(x.is_contiguous(), #x " must be contiguous")
+-#define CHECK_INPUT(x) CHECK_CUDA(x); CHECK_CONTIGUOUS(x)
+-
+-torch::Tensor fused_bias_act(const torch::Tensor& input, const torch::Tensor& bias, const torch::Tensor& refer,
+-    int act, int grad, float alpha, float scale) {
+-    CHECK_CUDA(input);
+-    CHECK_CUDA(bias);
+-
+-    return fused_bias_act_op(input, bias, refer, act, grad, alpha, scale);
+-}
+-
+-PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
+-    m.def("fused_bias_act", &fused_bias_act, "fused bias act (CUDA)");
+-}
+\ No newline at end of file
+diff --git a/KAIR_light/models/op/upfirdn2d.cpp b/KAIR_light/models/op/upfirdn2d.cpp
+deleted file mode 100644
+index d2e633d..0000000
+--- a/KAIR_light/models/op/upfirdn2d.cpp
++++ /dev/null
+@@ -1,23 +0,0 @@
+-#include <torch/extension.h>
+-
+-
+-torch::Tensor upfirdn2d_op(const torch::Tensor& input, const torch::Tensor& kernel,
+-                            int up_x, int up_y, int down_x, int down_y,
+-                            int pad_x0, int pad_x1, int pad_y0, int pad_y1);
+-
+-#define CHECK_CUDA(x) TORCH_CHECK(x.type().is_cuda(), #x " must be a CUDA tensor")
+-#define CHECK_CONTIGUOUS(x) TORCH_CHECK(x.is_contiguous(), #x " must be contiguous")
+-#define CHECK_INPUT(x) CHECK_CUDA(x); CHECK_CONTIGUOUS(x)
+-
+-torch::Tensor upfirdn2d(const torch::Tensor& input, const torch::Tensor& kernel,
+-                        int up_x, int up_y, int down_x, int down_y,
+-                        int pad_x0, int pad_x1, int pad_y0, int pad_y1) {
+-    CHECK_CUDA(input);
+-    CHECK_CUDA(kernel);
+-
+-    return upfirdn2d_op(input, kernel, up_x, up_y, down_x, down_y, pad_x0, pad_x1, pad_y0, pad_y1);
+-}
+-
+-PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
+-    m.def("upfirdn2d", &upfirdn2d, "upfirdn2d (CUDA)");
+-}
+\ No newline at end of file
+diff --git a/KAIR_light/utils/test.bmp b/KAIR_light/utils/test.bmp
+deleted file mode 100644
+index 6c40c31..0000000
+Binary files a/KAIR_light/utils/test.bmp and /dev/null differ
+diff --git a/RapidBase/Anvil b/RapidBase/Anvil
+--- a/RapidBase/Anvil
++++ b/RapidBase/Anvil
+@@ -1 +1 @@
+-Subproject commit 7b566502e9af1d84fd0f69da17bc0faef1e71228
++Subproject commit 7b566502e9af1d84fd0f69da17bc0faef1e71228-dirty
+diff --git a/models/RANSAC-Flow b/models/RANSAC-Flow
+--- a/models/RANSAC-Flow
++++ b/models/RANSAC-Flow
+@@ -1 +1 @@
+-Subproject commit f3d7207ede1ca29deb46914eec3399ae164240b2
++Subproject commit f3d7207ede1ca29deb46914eec3399ae164240b2-dirty
+diff --git a/models/tvnet_pytorch b/models/tvnet_pytorch
+--- a/models/tvnet_pytorch
++++ b/models/tvnet_pytorch
+@@ -1 +1 @@
+-Subproject commit 4dd309edcad46d62bd672759d18973a313e262b5
++Subproject commit 4dd309edcad46d62bd672759d18973a313e262b5-dirty
+diff --git a/torch2trt/NVIDIA-AI-IOT-torch2trt_-_2019-10-14_02-27-03/torch2trt/converters/Identity.py b/torch2trt/NVIDIA-AI-IOT-torch2trt_-_2019-10-14_02-27-03/torch2trt/converters/Identity.py
+deleted file mode 100644
+index 761aff5..0000000
+--- a/torch2trt/NVIDIA-AI-IOT-torch2trt_-_2019-10-14_02-27-03/torch2trt/converters/Identity.py
++++ /dev/null
+@@ -1,11 +0,0 @@
+-from torch2trt.torch2trt import *
+-
+-
+-@tensorrt_converter('torch.nn.Dropout.forward')
+-@tensorrt_converter('torch.nn.Dropout2d.forward')
+-@tensorrt_converter('torch.nn.Dropout3d.forward')
+-def convert_Identity(ctx):
+-    input = ctx.method_args[1]
+-    input_trt = trt_(ctx.network, input)
+-    output = ctx.method_return
+-    output._trt = input_trt
+\ No newline at end of file
+diff --git a/torch2trt/NVIDIA-AI-IOT-torch2trt_-_2019-10-14_02-27-03/torch2trt/converters/ReLU6.py b/torch2trt/NVIDIA-AI-IOT-torch2trt_-_2019-10-14_02-27-03/torch2trt/converters/ReLU6.py
+deleted file mode 100644
+index fc4e6ec..0000000
+--- a/torch2trt/NVIDIA-AI-IOT-torch2trt_-_2019-10-14_02-27-03/torch2trt/converters/ReLU6.py
++++ /dev/null
+@@ -1,8 +0,0 @@
+-from torch2trt.torch2trt import *
+-from .ReLU6 import *
+-
+-
+-@tensorrt_converter('torch.nn.functional.relu6')
+-def convert_relu6(ctx):
+-    ctx.method_args = (torch.nn.ReLU6(),) + ctx.method_args
+-    convert_ReLU6(ctx)
+\ No newline at end of file
+diff --git a/torch2trt/NVIDIA-AI-IOT-torch2trt_-_2019-10-14_02-27-03/torch2trt/converters/relu.py b/torch2trt/NVIDIA-AI-IOT-torch2trt_-_2019-10-14_02-27-03/torch2trt/converters/relu.py
+deleted file mode 100644
+index 37f7116..0000000
+--- a/torch2trt/NVIDIA-AI-IOT-torch2trt_-_2019-10-14_02-27-03/torch2trt/converters/relu.py
++++ /dev/null
+@@ -1,11 +0,0 @@
+-from torch2trt.torch2trt import *
+-from .ReLU import *
+-
+-
+-@tensorrt_converter('torch.relu')
+-@tensorrt_converter('torch.relu_')
+-@tensorrt_converter('torch.nn.functional.relu')
+-@tensorrt_converter('torch.nn.functional.relu_')
+-def convert_relu(ctx):
+-    ctx.method_args = (torch.nn.ReLU(),) + ctx.method_args
+-    convert_ReLU(ctx)
+\ No newline at end of file

@@ -1,0 +1,12 @@
+*.*
+!*.py
+!*.cpp
+!*.cu
+!*.h
+!.gitignore
+!*.hpp
+!*.c
+!*.txt
+
+
+

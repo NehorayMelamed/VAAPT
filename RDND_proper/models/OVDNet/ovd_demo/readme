@@ -1,0 +1,8 @@
+<Tensorflow flow code for online video deblurring>
+
+#To do
+1. Edit demo.py and specifiy the input images (line 22-24, demo.py)
+2. Run demo.py 
+
+#cite the following paper
+Tae Hyun Kim, Kyoung Mu Lee, Bernhard Schölkopf, Michael Hirsch, "Online Video Deblurring via Dynamic Temporal Blending Network", IEEE International Conference on Computer Vision (ICCV), 2017.

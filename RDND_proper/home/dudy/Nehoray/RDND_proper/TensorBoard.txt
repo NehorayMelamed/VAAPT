@@ -1,0 +1,7 @@
+
+conda activate faceswap
+tensorboard --logdir=/home/mafat/Pytorch_Checkpoints/TensorBoard --host=127.0.0.1 
+
+
+tensorboard --logdir=/home/mmm/Desktop/tashtit/PROJECTS/rlsp/Pytorch_Checkpoints/TensorBoard/ --host=127.0.0.1 
+

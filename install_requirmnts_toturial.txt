@@ -1,0 +1,18 @@
+first install torch
+    pip3 install torch torchvision torchaudio
+
+now u can install segment like see -> https://github.com/IDEA-Research/Grounded-Segment-Anything
+please remember to modify the code
+
+I removed the
+jax==0.4.13
+jaxlib==0.4.13+cuda12.cudnn89
+jaxline==0.0.5
+because we need to use the fb optical flow
+now install the other
+
+
+
+u neeed to install tkniret by
+sudo apt install python3-tk
+sudo apt install tk-dev

@@ -1,0 +1,11 @@
+*.html
+*.bat
+*.js
+*.csv
+*.xml
+*.jpg
+*.png
+*.webm
+*.iml
+./idea
+tests/functional/q_ideas.py

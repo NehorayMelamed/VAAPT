@@ -1,0 +1,15 @@
+noise model = KAYA
+PPP = [2,10]
+crop_size = (192,192)
+data = REDS
+
+#TODO: add scp back to comuter - with pythoncode or at lesat scp but efficient
+# handle imshowtorch
+# run without blur - ########
+# run moving images with blur + denoise
+# run vrt - 2/4 guys with more parts unfrozen
+# run 2 vrts denoise + deblur
+# get gpu, gou's based on what is running
+# fix normalization in sapvings
+
+

@@ -1,0 +1,13 @@
+pip install easydict
+pip install lmdb
+pip install einops
+pip install jpeg4py
+pip install 'protobuf~=3.19.0'
+conda install setuptools==58.0.4
+pip install timm
+pip install tb-nightly
+pip install tensorboardx
+pip install scikit-image
+pip install rsa
+pip install six
+pip install pillow

@@ -1,0 +1,13 @@
+*.*
+!*.m
+!*.txt
+!.gitattributes
+!.gitignore
+!.gitmodules
+!*.md
+!*.py
+!*.cu
+!*.cpp
+!*.c
+!*.cxx
+!*.sh

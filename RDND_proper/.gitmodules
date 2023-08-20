@@ -1,0 +1,4 @@
+[submodule "RapidBase/Anvil"]
+	path = RapidBase/Anvil
+	url = https://rdndreadonly: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@github.com/galeoai/Anvil
+    branch = main
